@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://markets.businessinsider.com/cross-domain -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Cross Domain Authentication and Tracking</title>
+    <script>window.scriptsToLoad = window.scriptsToLoad || []; window.scriptsToLoad.push("%3Cscript%0A%20%20%20%20%20%20async%0A%20%20%20%20%20%20type%3D%22text%2Fjavascript%22%0A%20%20%20%20%20%20src%3D%22%2Fscripts%2Fcross-domain.0368002b228354ddc795.js%22%0A%20%20%20%20%20%0A%20%20%20%20%3E%3C%2Fscript%3E");</script>
+<script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script><script async="" type="text/javascript" src="./cross-domain.0368002b228354ddc795.js(1).download"></script></head>
+
+<body>
+  
+    <script id="script-loader">
+    var head = document.querySelector('head');
+    var body = document.querySelector('body');
+  
+    function downloadScript(script) {
+      var s = document.createElement('script');
+  
+      Array.from(script.attributes).forEach(function iterateAttributes(attribute) {
+        var name = attribute.nodeName;
+        var value = attribute.nodeValue;
+        if (['id', 'src', 'async', 'defer'].includes(name)) {
+          if (['async', 'defer'].includes(name) && !value) value = 1;
+          s[name] = value;
+        } else {
+          s.setAttribute(name, value);
+        }
+      });
+  
+      s.onload = s.onreadystatechange = function downloadScriptOnLoad( _, isAbort ) {
+        if (isAbort || !s.readyState || /loaded|complete/.test(s.readyState)) {
+          s.onload = s.onreadystatechange = null;
+        }
+      };
+  
+      return s;
+    }
+  
+    function scriptLoaderLoadScript(scriptContent) {
+      scriptContent = decodeURIComponent(scriptContent);
+  
+      var temporaryContainer = document.createElement('div');
+      temporaryContainer.innerHTML = scriptContent;
+  
+      var temporaryScripts = Array.from(temporaryContainer.querySelectorAll('script'))
+      temporaryScripts.forEach(function loadScript(script) {
+        try {
+          if (script.textContent) eval(script.textContent); 
+          if (script.src) {
+            script = downloadScript(script); 
+          }
+          head.appendChild(script);
+        } catch(error) {
+          console.error(error);
+        }
+      });
+    }
+  
+    function scriptLoaderLoadScripts(scripts) {
+      if (
+        !scripts
+        || !Array.isArray(scripts)
+        || !scripts.filter(function(s) { return s; }).length
+      ) return;
+  
+      scripts.forEach(function(scriptConfig) {
+        setTimeout(function() { scriptLoaderLoadScript(scriptConfig); }, 0);
+      });
+    }
+  
+    window.addEventListener('load', function scriptLoaderLoad() {
+      scriptLoaderLoadScripts(window.scriptsToLoad);
+    });
+  
+    window.Fenrir = window.Fenrir || {"config": {}};
+  
+    document.addEventListener('loadDelayedThirdPartyScripts', function loadDelayedHandler() {
+      scriptLoaderLoadScripts(window.gdprScriptsToLoad);
+      window.Fenrir.onloadDelayedThirdPartyScripts();
+    });
+  </script>
+
+
+</body></html>
